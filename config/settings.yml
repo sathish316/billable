@@ -1,0 +1,31 @@
+url: "https://te.thoughtworks.com/time_sheets/new"
+author: GIT_AUTHOR
+login: yes
+username: USERNAME
+password: PASSWORD_OR_TOKEN
+code: PROJECT_CODE
+hours: 8
+country: 'IND'
+profiles:
+  tw:
+    login_form: '#fm1'
+    username_field: "username"
+    password_field: "password"
+    activity_start_date: nil
+    activity_end_date: "week_ending_date_string"
+    activity_country: "time_records_NNN_country"
+    activity_code: "time_records_NNN_activity"
+    activity_billable: "time_records_NNN_billable_true"
+    activity_non_billable: "time_records_NNN_billable_false"
+    activity_description: "time_records_NNN_task_comment"
+    activity_hours_0: "time_records_0_mon"
+    activity_hours_1: "time_records_1_tue"
+    activity_hours_2: "time_records_2_wed"
+    activity_hours_3: "time_records_3_thu"
+    activity_hours_4: "time_records_4_fri"
+    activity_hours_5: "time_records_5_sat"
+    activity_hours_6: "time_records_6_sun"
+    activity_expense: "time_sheet_expenses_true"
+    activity_no_expense: "time_sheet_expenses_false"
+    save_button_name: 'commit'
+    errors_selector: '#errorExplanation'

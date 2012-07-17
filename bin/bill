@@ -1,0 +1,36 @@
+#!/usr/bin/env ruby
+
+lib = File.expand_path(File.dirname(__FILE__) + '/../lib')
+$LOAD_PATH.unshift(lib) if File.directory?(lib) && !$LOAD_PATH.include?(lib)
+
+require 'billable'
+require 'yaml'
+require 'trollop'
+
+default_settings_file = File.expand_path(File.dirname(__FILE__) + '/../config/settings.yml')
+default_options = YAML::load_file(default_settings_file).symbolize_keys!
+
+options = Trollop::options do
+  version "billable"
+  banner <<-EOS
+Billable is a command line utility to fill time sheets using Git logs and mechanize.
+
+Usage:
+  $ cd git_repo
+  $ bill [options]
+where [options] are:
+EOS
+  opt :profile, "Company Profile. To add more organizations fork this repo or modify settings.yml", :default => 'tw'
+  opt :author, "Author or Commit message username in Git logs", :default => default_options[:author]
+  opt :login, "Login required. yes if you're at home, no if you're at work", :default => default_options[:login]
+  opt :username, "Username", :default => default_options[:username]
+  opt :password, "Password or RSA Token", :default => default_options[:password]
+  opt :code, "Project code. ", :default => default_options[:code]
+  opt :from, "From date (mm/dd/yyyy). Leave blank if last monday", :default => ""
+  opt :to, "To date (mm/dd/yyyy). Leave blank if last friday", :default => ""
+  opt :hours, "Hours per day", :default => "8"
+  opt :country, "Country", :default => "IND"
+end
+
+git_log = Billable::GitLog.new(options[:from], options[:to], options[:author])
+Billable::Bill.new(options[:profile], default_options.merge(options)).submit(git_log)
