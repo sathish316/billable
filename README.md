@@ -41,5 +41,5 @@ $ bill -a John -u john123 -s password123 -c "AREA 51" -f 7/1/2012 -t 7/5/2012 -h
 
 ### TODO
 
-# Currently works with Login
-# TODO: Fill timesheet without Login
+1. DONE: Fill timesheet with RSA Login
+2. TODO: Fill timesheet without Login
