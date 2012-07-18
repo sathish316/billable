@@ -38,6 +38,14 @@ You can customize from date, to date and billed hours:
 ```
 $ bill -a John -u john123 -s password123 -c "AREA 51" -f 7/1/2012 -t 7/5/2012 -h 9
 ```
+### Assumptions
+
+It makes the following assumptions:
+
+* It works only for git
+* Your name is present in git author or commit message
+* You always fill timesheets the next week
+* You're lazy enough to skip Readmes
 
 ### TODO
 
