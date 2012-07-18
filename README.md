@@ -12,7 +12,7 @@ To install billable:
 
 ```
 $ git clone *repo*
-
+$ bundle install
 $ rake install
 ```
 
@@ -22,7 +22,7 @@ To see all available options
 $ bill --help
 ```
 
-Example usage (with default dates):
+Example usage (with default dates between last monday and last friday):
 
 ```
 $ cd project-repo
