@@ -32,5 +32,7 @@ EOS
   opt :country, "Country", :default => "IND"
 end
 
+options[:from] = Billable::GitLog.last_monday if options[:from].blank?
+options[:to] = Billable::GitLog.last_friday if options[:to].blank?
 git_log = Billable::GitLog.new(options[:from], options[:to], options[:author])
 Billable::Bill.new(options[:profile], default_options.merge(options)).submit(git_log)

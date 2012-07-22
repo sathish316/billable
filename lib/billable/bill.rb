@@ -25,7 +25,8 @@ class Billable::Bill
   end
 
   def fill_timesheet
-    @timesheet.field_with(:id => profile['activity_end_date']).value = Date.strptime(@settings[:to], "%m/%d/%Y").end_of_week.strftime("%d %b %Y")
+    end_date = Date.strptime(@settings[:to], "%m/%d/%Y").end_of_week.strftime("%d %b %Y")
+    @timesheet.field_with(:id => profile['activity_end_date']).value = end_date
     @timesheet.radiobuttons_with(:id => profile["activity_no_expense"])[0].check
     0.upto(4) do |i|
       @timesheet.field_with(:id => profile['activity_country'].gsub('NNN',i.to_s)).value = @settings[:country]

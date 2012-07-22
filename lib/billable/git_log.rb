@@ -10,8 +10,7 @@ class Billable::GitLog
   end
 
   def log_entries
-    @from ||= last_monday
-    @to ||= last_friday
+    p "Getting Git logs from #{@from} to #{@to}"
     `git log --since=#{@from} --until=#{@to} --grep=#{@author} --pretty=format:"%an | %aD | %s"`
   end
 
@@ -21,15 +20,15 @@ class Billable::GitLog
     end[day_num]
   end
 
-  private
-
   def self.last_monday
-    1.week.ago.beginning_of_week.beginning_of_day.strftime('%m/%d/%Y')
+    1.week.ago.beginning_of_week.strftime('%-m/%-d/%Y')
   end
 
   def self.last_friday
-    1.week.ago.end_of_week.end_of_day.strftime('%m/%d/%Y')
+    (1.week.ago.beginning_of_week + 4.days).strftime('%-m/%-d/%Y')
   end
+
+  private
 
   def parse(log_entries)
     log_entries.split("\n").map do |line|
